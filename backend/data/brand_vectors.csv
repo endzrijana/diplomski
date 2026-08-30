@@ -1,0 +1,22 @@
+﻿brand,brand_type,eco_conscious,luxury_orientation,budget_orientation,adventure_orientation,family_friendly,authenticity_signal
+Emirates,avio,0.2,1.0,0.0,0.0,0.5,0.2
+Wizz Air,avio,0.5,0.0,1.0,0.0,0.0,0.0
+Qatar Airways,avio,0.0,1.0,0.0,0.0,0.5,0.0
+Lufthansa,avio,0.75,0.6,0.2,0.0,0.2,0.0
+Turkish Airlines,avio,0.0,0.5,0.0,0.0,0.3,0.3
+Etihad Airways,avio,0.5,1.0,0.0,0.0,0.0,0.0
+Norwegian Air,avio,0.7,0.0,1.0,0.0,0.0,0.0
+British Airways,avio,0.7,0.8,0.3,0.2,0.5,0.5
+Eurowings,avio,0.7,0.3,0.8,0.1,0.2,0.1
+Air France,avio,0.6,1.0,0.0,0.0,0.0,0.0
+Marriott,hotel,0.6,0.9,0.5,0.3,0.6,0.5
+Airbnb,hotel,0.3,0.2,0.7,0.4,0.5,0.9
+Habitas,hotel,1.0,0.0,0.0,0.5,0.0,0.5
+Hilton,hotel,0.5,0.8,0.5,0.0,0.5,0.0
+Hostelworld,hotel,0.2,0.0,1.0,0.7,0.1,0.6
+Aman Resorts,hotel,0.5,1.0,0.0,0.0,0.0,1.0
+Booking.com,hotel,0.6,0.2,0.7,0.2,0.4,0.4
+Four Seasons,hotel,0.7,1.0,0.0,0.1,0.5,0.6
+Selina,hotel,0.4,0.1,0.6,0.5,0.1,0.9
+Ibis / Accor,hotel,0.0,0.0,1.0,0.0,0.5,0.0
+Six Senses,hotel,1.0,1.0,0.0,0.5,0.5,1.0
