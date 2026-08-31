@@ -387,11 +387,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://diplomski-b5lh.onrender.com",
 
-        # Kada deployujes frontend na Vercel,
-        # ovde dodaj njegov URL:
-        #
-        # "https://tvoja-aplikacija.vercel.app",
     ],
 
     allow_credentials=True,
