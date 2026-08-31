@@ -303,9 +303,14 @@ function HeroPosts({ selected }) {
             })
         );
 
+    const indexedPosts = posts.map((post, index) => ({
+        ...post,
+        screenshotIndex: index,
+    }));
+
     const loopPosts = [
-        ...posts,
-        ...posts
+        ...indexedPosts,
+        ...indexedPosts,
     ];
 
     return (
@@ -394,7 +399,7 @@ function HeroPostCard({ item, selected, index }) {
     if (isInstagram && item?.post_url) {
         const screenshot = getInstagramScreenshot(
             selected?.influencer_handle,
-            index % 5
+            item.screenshotIndex
         );
 
         return (
