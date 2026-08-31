@@ -687,7 +687,7 @@ function ContentPanel({ selected }) {
                                         alt=""
                                     />
                                 ) : (
-                                    <span>{index + 1}</span>
+                                    <span>{index}</span>
                                 )}
                             </div>
 
