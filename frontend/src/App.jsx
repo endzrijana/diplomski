@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./styles.css";
 import logo from "./images/plane.png";
 
@@ -303,14 +303,9 @@ function HeroPosts({ selected }) {
             })
         );
 
-    const indexedPosts = posts.map((post, index) => ({
-        ...post,
-        screenshotIndex: index,
-    }));
-
     const loopPosts = [
-        ...indexedPosts,
-        ...indexedPosts,
+        ...posts,
+        ...posts
     ];
 
     return (
@@ -318,16 +313,20 @@ function HeroPosts({ selected }) {
 
             <div className="moving-post-column">
 
-                {loopPosts.map(
-                    (post, index) => (
+                {loopPosts.map((post, index) => {
+
+                    const postIndex =
+                        (index + 1 + posts.length) % posts.length;
+
+                    return (
                         <HeroPostCard
                             key={`${post.post_url || post.video_id || "post"}-${index}`}
                             item={post}
                             selected={selected}
-                            index={index}
+                            postIndex={postIndex}
                         />
-                    )
-                )}
+                    );
+                })}
 
             </div>
 
@@ -335,7 +334,7 @@ function HeroPosts({ selected }) {
     );
 }
 
-function HeroPostCard({ item, selected, index }) {
+function HeroPostCard({ item, selected, postIndex }) {
     const [playing, setPlaying] = useState(false);
 
     const platform = String(item?.platform || "").toLowerCase();
@@ -360,9 +359,10 @@ function HeroPostCard({ item, selected, index }) {
                                 src={item.thumbnail_url}
                                 alt={item.title || "YouTube video"}
                                 className="moving-post-image"
+                                loading="lazy"
                             />
                         ) : (
-                            <div className={`travel-placeholder placeholder-${index % 4}`}>
+                            <div className={`travel-placeholder placeholder-${postIndex % 4}`}>
                                 <span>
                                     {selected?.influencer_handle || "@travelcreator"}
                                 </span>
@@ -399,7 +399,7 @@ function HeroPostCard({ item, selected, index }) {
     if (isInstagram && item?.post_url) {
         const screenshot = getInstagramScreenshot(
             selected?.influencer_handle,
-            item.screenshotIndex
+            postIndex
         );
 
         return (
@@ -420,7 +420,7 @@ function HeroPostCard({ item, selected, index }) {
                     ) : (
                         <div className="travel-placeholder">
                             <span>
-                                {selected?.influencer_handle || "@travelcreator"}
+                                {selected?.influencer_handle}
                             </span>
                         </div>
                     )}
@@ -433,53 +433,16 @@ function HeroPostCard({ item, selected, index }) {
                         </span>
 
                         <strong>
-                            {selected?.influencer_handle || "@travelcreator"}
+                            {selected?.influencer_handle}
                         </strong>
 
-                        <p>
-                            {item.caption}
-                        </p>
+                        <p>{item.caption}</p>
                     </div>
                 </a>
             </article>
         );
     }
-
-    const fallbackImage =
-        item?.image ||
-        item?.thumbnail_url ||
-        getPostImage(selected, index);
-
-    return (
-        <article className="moving-post-card">
-            {fallbackImage ? (
-                <img
-                    src={fallbackImage}
-                    alt={item?.caption || item?.title || "Travel post"}
-                    className="moving-post-image"
-                />
-            ) : (
-                <div className={`travel-placeholder placeholder-${index % 4}`}>
-                    <span>
-                        {selected?.influencer_handle || "@travelcreator"}
-                    </span>
-                </div>
-            )}
-
-            <div className="moving-post-gradient" />
-
-            <div className="moving-post-info">
-                <span className="moving-post-platform">
-                    {item?.platform || selected?.platform || "Post"}
-                </span>
-                <strong>
-                    {selected?.influencer_handle || "@travelcreator"}
-                </strong>
-                <p>{item?.caption || item?.title}</p>
-            </div>
-        </article>
-    );
-}
+    }
 
 
 /* =========================================================
@@ -687,7 +650,7 @@ function ContentPanel({ selected }) {
                                         alt=""
                                     />
                                 ) : (
-                                    <span>{index}</span>
+                                    <span>{index + 1}</span>
                                 )}
                             </div>
 
