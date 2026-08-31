@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./styles.css";
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
@@ -59,6 +59,25 @@ function percent(value) {
     return `${(Number(value || 0) * 100).toFixed(0)}%`;
 }
 
+function getInstagramScreenshot(handle, index) {
+    const cleanHandle = String(handle || "")
+        .replace("@", "")
+        .toLowerCase()
+        .trim();
+
+    const postNumber = index + 1;
+
+    const expectedName = `${cleanHandle}_${postNumber}.png`;
+
+    const match = Object.entries(instagramImages).find(
+        ([path]) =>
+            path.toLowerCase().endsWith(
+                `/images/${expectedName}`.toLowerCase()
+            )
+    );
+
+    return match ? match[1] : null;
+}
 function parseCaptions(value) {
     if (!value) return [];
 
@@ -363,18 +382,50 @@ function HeroPostCard({ item, selected, index }) {
     }
 
     if (isInstagram && item?.post_url) {
-        const embedUrl = `${item.post_url.replace(/\/$/, "")}/embed`;
+        const screenshot = getInstagramScreenshot(
+            selected?.influencer_handle,
+            index % 5
+        );
 
         return (
             <article className="moving-post-card instagram-card">
-                <iframe
-                    className="instagram-embed"
-                    src={embedUrl}
-                    title={item.caption || "Instagram post"}
-                    allow="encrypted-media"
-                    loading="lazy"
-                    scrolling="no"
-                />
+                <a
+                    href={item.post_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="instagram-screenshot-link"
+                >
+                    {screenshot ? (
+                        <img
+                            src={screenshot}
+                            alt={item.caption || "Instagram post"}
+                            className="moving-post-image"
+                            loading="lazy"
+                        />
+                    ) : (
+                        <div className="travel-placeholder">
+                            <span>
+                                {selected?.influencer_handle || "@travelcreator"}
+                            </span>
+                        </div>
+                    )}
+
+                    <div className="moving-post-gradient" />
+
+                    <div className="moving-post-info">
+                        <span className="moving-post-platform">
+                            Instagram
+                        </span>
+
+                        <strong>
+                            {selected?.influencer_handle || "@travelcreator"}
+                        </strong>
+
+                        <p>
+                            {item.caption}
+                        </p>
+                    </div>
+                </a>
             </article>
         );
     }

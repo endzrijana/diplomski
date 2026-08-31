@@ -1733,7 +1733,22 @@ pa animacija može neprimetno da krene ponovo.
     .moving-post-card.short {
         width: min(350px, 100%);
     }
-}
+
+
+    .instagram-screenshot-link {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+        color: inherit;
+        text-decoration: none;
+    }
+
+        .instagram-screenshot-link .moving-post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
 @media (max-width: 600px) {
     .hero-posts-wrapper {
