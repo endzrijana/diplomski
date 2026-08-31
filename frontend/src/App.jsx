@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./styles.css";
+import airplane from "./images/airplane.png";
+import logo from "./images/plane.png";
+
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
@@ -137,8 +140,10 @@ function Navbar({ active, onChange }) {
                 onClick={() => onChange("matchmaking")}
             >
                 <div className="nav-logo-symbol">
-                    <span />
-                    <span />
+                    <img
+                        src={logo}
+                        alt="TravelMatch"
+                    />
                 </div>
 
                 <span className="nav-brand-text">TravelMatch</span>
